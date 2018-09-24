@@ -39,6 +39,7 @@ group :development do
 
   gem 'cocoapods-dependencies', '~> 1.0.beta.1'
 
+  # Unit tests
   gem 'bacon'
   gem 'mocha'
   gem 'mocha-on-bacon'
@@ -53,7 +54,14 @@ group :development do
   gem 'inch_by_inch'
   gem 'rubocop'
 
+  # Automatically run checks when submitting a pull request
   gem 'danger'
+
+  # Automatically run checks in local development
+  gem 'guard'
+  gem 'guard-bacon'
+  gem 'guard-bundler'
+  gem 'guard-rubocop'
 end
 
 group :debugging do
