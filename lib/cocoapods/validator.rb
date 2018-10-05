@@ -601,7 +601,7 @@ module Pod
     # @return [void]
     #
     def build_pod
-      if !xcodebuild_available?
+      if !should_build?
         UI.warn "Skipping compilation with `xcodebuild` because it can't be found.\n".yellow
       else
         UI.message "\nBuilding with `xcodebuild`.\n".yellow do
@@ -630,7 +630,7 @@ module Pod
     # @return [void]
     #
     def test_pod
-      if !xcodebuild_available?
+      if !should_build?
         UI.warn "Skipping test validation with `xcodebuild` because it can't be found.\n".yellow
       else
         UI.message "\nTesting with `xcodebuild`.\n".yellow do
@@ -649,8 +649,8 @@ module Pod
       end
     end
 
-    def xcodebuild_available?
-      !Executable.which('xcodebuild').nil? && ENV['COCOAPODS_VALIDATOR_SKIP_XCODEBUILD'].nil?
+    def should_build?
+      XcodeBuild.available? && ENV['COCOAPODS_VALIDATOR_SKIP_XCODEBUILD'].nil?
     end
 
     FILE_PATTERNS = %i(source_files resources preserve_paths vendored_libraries
